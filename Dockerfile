@@ -1,4 +1,4 @@
-FROM python:3.10 as requirements-stage
+FROM python:3.11 as requirements-stage
 WORKDIR /tmp
 RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org poetry
 COPY ./pyproject.toml ./poetry.lock* /tmp/
