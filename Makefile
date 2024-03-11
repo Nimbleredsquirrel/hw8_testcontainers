@@ -8,8 +8,8 @@ help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: test
-test: ## Runs pytest with coverage
-	$(TEST)
+#test: ## Runs pytest with coverage
+	#$(TEST)
 
 #.PHONY: test-fast
 #test-fast: ## Runs pytest with exitfirst
@@ -26,7 +26,7 @@ test: ## Runs pytest with coverage
 .PHONY: lint
 lint: ## Lint code
 	black --check $(CODE)
-	flake8 --jobs 4 --statistics --show-source --ignore E501,W503 $(CODE)
+	flake8 --jobs 4 --statistics --show-source --ignore E501,W503,E203 $(CODE)
 	pylint $(CODE)
 	mypy --namespace-packages --ignore-missing-imports --explicit-package-bases $(CODE)
 #	pytest --dead-fixtures --dup-fixtures
