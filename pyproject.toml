@@ -1,22 +1,28 @@
 [tool.poetry]
-name = "fraud detector"
-version = "2.5.2"
+name = "hw4"
+version = "0.1.0"
 description = ""
-authors = ["Arinka"]
+authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-pandas = "^2.1.3"
-fastapi = "^0.104.1"
-uvicorn = {extras = ["standard"], version = "^0.24.0.post1"}
-scikit-learn = "^1.3.2"
-sqlalchemy = "^2.0.23"
-numpy = "^1.26.2"
-pytest = "^7.4.3"
-httpx = "^0.25.2"
-testcontainers = {extras = ["postgres"], version = "^3.7.1"}
-postgres = "^4.0"
+python = "^3.10"
+fastapi = "^0.104.0"
+uvicorn = {extras = ["standard"], version = "^0.23.2"}
+scikit-learn = "^1.3.1"
+numpy = "^1.20.3"
+httpx = "^0.25.0"
+sqlalchemy = "^2.0.22"
+flake8 = "^6.1.0"
+pylint = "^3.0.2"
+make = "^0.1.6.post2"
+pytest = "^7.4.2"
+pytest-cov = "^4.1.0"
+pandas = "^1.3.4"
+black = "^23.10.1"
+mypy = "^1.6.1"
+osmpythontools = "^0.3.5"
+requests = "^2.31.0"
 
 
 [build-system]

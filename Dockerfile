@@ -1,3 +1,6 @@
+FROM postgres:13.3
+RUN apt update && apt install python3 python3-pip postgresql-plpython3-${PG_MAJOR} -y
+RUN echo 'CREATE EXTENSION IF NOT EXISTS plpython3u;' > /docker-entrypoint-initdb.d/py3.sql
 FROM python:3.11 as requirements-stage
 WORKDIR /tmp
 RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org poetry
