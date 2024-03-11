@@ -5,13 +5,13 @@ from sqlalchemy import Column, DateTime, Integer, String
 from .database import Base
 
 
-class DETECTOR(Base):  # pylint: disable=R0903
+class Trees(Base):  # pylint: disable=R0903
     """Template from database."""
 
-    __tablename__ = "flowers"
+    __tablename__ = "Trees"
 
     id = Column(Integer, primary_key=True)
-    message = Column(String, default="")
-    baseline = Column(String, default="constant-clean")
-    predicted_target = Column(Integer)
+    place = Column(String, default="")
+    year = Column(String, default="")
+    amount = Column(String, default="")
     request_time = Column(DateTime)

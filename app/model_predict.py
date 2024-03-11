@@ -1,42 +1,21 @@
 """Model predictions."""
+import requests
 
 
-from re import search
-
-from .schemas import ModelPrediction
-
-
-def constant_fraud(message: str) -> ModelPrediction:
-    """Return fraud."""
-    if len(message) > 0:
-        result = ModelPrediction(result="fraud")
-    else:
-        result = ModelPrediction(result="fraud")
-    return result
-
-
-def constant_clean(message: str) -> ModelPrediction:
-    """Return clean."""
-    if message:
-        result = ModelPrediction(result="clean")
-    else:
-        result = ModelPrediction(result="clean")
-    return result
-
-
-def first_hypothesis(message: str) -> ModelPrediction:
-    """Return prediction based on rule."""
-    if search(r"[ТтTt][^\s]*[ЛлLl][^\s]*[ГгGg][^\s]*", message) or search(
-        r"[^\s]*[Тт][^\s]*[Мм][^\s]*[^\s]*[Нн][^\s]*", message
-    ):
-        result = ModelPrediction(result="fraud")
-    else:
-        result = ModelPrediction(result="clean")
-    return result
-
-
-Func = {
-    "CONSTANT_FRAUD": constant_fraud,
-    "CONSTANT_CLEAN": constant_clean,
-    "FIRST_HYPOTHESIS": first_hypothesis,
-}
+def tree_count(place, year):
+    """Parser for OSM."""
+    town = place.split(", ")[0]
+    url = r"http://overpass-api.de/api/interpreter"
+    query = f"""[out:json][date:'{year}-01-01T00:00:00Z'][maxsize:2000000000];
+    area["name:en"="{town}"]->.searchArea;
+    (node["natural"="tree"](area.searchArea);); out count;"""
+    result = requests.post(url, data=query, timeout=60)
+    t = result.text
+    cap = "total"
+    for i in range(len(t)):
+        if t[i : i + len(cap)] == cap:
+            t = t[i + len(cap) + 4 :]
+            for j in range(len(t)):  # pylint: disable=C0200
+                if not t[j].isdigit():
+                    return int(t[:j])
+    return 0
